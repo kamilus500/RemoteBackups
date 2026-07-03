@@ -2,6 +2,9 @@
 @inject AuthenticationStateProvider AuthStateProvider
 @using Microsoft.AspNetCore.Components.Authorization
 @using RemoteBackups.Blazor.Providers
+@using RemoteBackups.Blazor.Services.Interfaces
+
+@inject ILocalizationService Localizer
 
 <MudNavMenu Class="pa-2">
     <AuthorizeView>
@@ -11,13 +14,13 @@
                     <MudAvatar Style="height:60px; width:60px; border: 2px solid var(--mud-palette-primary);" Image="images/default-avatar.png" />
                 </MudBadge>
 
-                <MudText Typo="Typo.caption" Class="d-block mt-2 text-muted" Style="text-transform: uppercase; letter-spacing: 0.5px;">Zalogowany jako</MudText>
+                <MudText Typo="Typo.caption" Class="d-block mt-2 text-muted" Style="text-transform: uppercase; letter-spacing: 0.5px;">@Localizer.GetString("Logged_in_as")</MudText>
                 <MudText Typo="Typo.subtitle2" Class="fw-bold mb-3 text-truncate" Title="@context.User.Identity?.Name">
                     @context.User.Identity?.Name
                 </MudText>
 
                 <MudButton Variant="Variant.Outlined" Color="Color.Error" FullWidth="true" StartIcon="@Icons.Material.Filled.Logout" OnClick="LogOut">
-                    Wyloguj się
+                    @Localizer.GetString("Logout")
                 </MudButton>
             </MudPaper>
         </Authorized>
@@ -26,10 +29,10 @@
             <MudPaper Class="pa-4 mb-4 text-center" Elevation="0" Outlined="true" Style="background-color: var(--mud-palette-background-grey);">
                 <MudStack Spacing="2">
                     <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" StartIcon="@Icons.Material.Filled.Login" OnClick="LogIn">
-                        Zaloguj się
+                        @Localizer.GetString("LogIn")
                     </MudButton>
                     <MudButton Variant="Variant.Outlined" Color="Color.Default" FullWidth="true" StartIcon="@Icons.Material.Filled.PersonAdd" OnClick="Register">
-                        Zarejestruj się
+                        @Localizer.GetString("Register")
                     </MudButton>
                 </MudStack>
             </MudPaper>
@@ -38,7 +41,7 @@
 
     <MudDivider Class="my-2" />
 
-    <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Strona główna</MudNavLink>
+    <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">@Localizer.GetString("Home")</MudNavLink>
     
 </MudNavMenu>
 

@@ -10,6 +10,13 @@ namespace RemoteBackups.Blazor.Extensions
 {
     public static class ServiceCollectionExtensions
     {
+
+        public static IServiceCollection AddLocalizations(this IServiceCollection services)
+        {
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+            return services;
+        }
+
         public static IServiceCollection AddAuthServices(this IServiceCollection services)
         {
             services.AddAuthorizationCore();
@@ -21,6 +28,8 @@ namespace RemoteBackups.Blazor.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddMudServices();
+
+            services.AddScoped<ILocalizationService, LocalizationService>();
 
             services.AddScoped<ILocalStorageService, LocalStorageService>();
 

@@ -1,3 +1,6 @@
 ﻿@page "/"
+@using RemoteBackups.Blazor.Services.Interfaces
 
-<PageTitle>Home</PageTitle>
+@inject ILocalizationService Localizer
+
+<PageTitle>@Localizer.GetString("Home")</PageTitle>
