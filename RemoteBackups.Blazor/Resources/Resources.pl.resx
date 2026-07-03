@@ -132,6 +132,9 @@
   <data name="Field_password_required" xml:space="preserve">
     <value>Pole Hasło jest wymagane.</value>
   </data>
+  <data name="Files" xml:space="preserve">
+    <value>Pliki</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Strona główna</value>
   </data>
@@ -147,6 +150,9 @@
   <data name="LogOut" xml:space="preserve">
     <value>Wyloguj się</value>
   </data>
+  <data name="No_access" xml:space="preserve">
+    <value>Brak dostępu</value>
+  </data>
   <data name="Passwords_not_identical" xml:space="preserve">
     <value>Podane hasła nie są identyczne.</value>
   </data>
@@ -155,5 +161,17 @@
   </data>
   <data name="Register_title" xml:space="preserve">
     <value>Rejestracja</value>
+  </data>
+  <data name="Start_upload" xml:space="preserve">
+    <value>Rozpocznij przesyłanie</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Wgraj</value>
+  </data>
+  <data name="Upload_files" xml:space="preserve">
+    <value>Upload Plików</value>
+  </data>
+  <data name="You_must_log_in" xml:space="preserve">
+    <value>Musisz się zalogować, aby mieć możliwość przesyłania plików.</value>
   </data>
 </root>

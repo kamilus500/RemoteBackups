@@ -1,0 +1,49 @@
+﻿@page "/files"
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+
+@attribute [Authorize]
+
+<AuthorizeView>
+    <Authorized>
+        <MudText Typo="Typo.h4" Class="mb-4">Moje kopie zapasowe</MudText>
+
+        <MudTable Items="@_files" Dense="true" Hover="true" Responsive="true" Loading="@_isLoading">
+            <HeaderContent>
+                <MudTh>Nazwa pliku</MudTh>
+                <MudTh>Rozmiar</MudTh>
+                <MudTh>Data wgrania</MudTh>
+                <MudTh Style="text-align: right;">Akcje</MudTh>
+            </HeaderContent>
+
+            <RowTemplate Context="file">
+                <MudTd DataLabel="Nazwa pliku">@file.OriginalName</MudTd>
+                <MudTd DataLabel="Rozmiar">@FormatBytes(file.SizeInBytes)</MudTd>
+                <MudTd DataLabel="Data wgrania">@file.UploadAt.ToLocalTime().ToString("g")</MudTd>
+                <MudTd DataLabel="Akcje" Style="text-align: right;">
+                    <MudTooltip Text="Pobierz">
+                        <MudIconButton Icon="@Icons.Material.Filled.Download"
+                                       Color="Color.Primary"
+                                       OnClick="@(() => DownloadFile(file.Id, file.OriginalName))" />
+                    </MudTooltip>
+                    <MudTooltip Text="Usuń">
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                                       Color="Color.Error"
+                                       OnClick="@(() => DeleteFile(file.Id))" />
+                    </MudTooltip>
+                </MudTd>
+            </RowTemplate>
+
+            <PagerContent>
+                <MudTablePager InfoFormat="{first_item}-{last_item} z {all_items}" RowsPerPageString="Wierszy na stronę:" />
+            </PagerContent>
+        </MudTable>
+    </Authorized>
+
+    <NotAuthorized>
+        <div class="alert alert-danger mt-5">
+            <h4>@Localizer.GetString("No_access")</h4>
+            <p>@Localizer.GetString("You_must_log_in")</p>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>

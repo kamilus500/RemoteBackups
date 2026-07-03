@@ -6,7 +6,7 @@ using RemoteBackups.Api.Infrastructure.Validations;
 using RemoteBackups.Api.Infrastructure.Validations.Interfaces;
 using RemoteBackups.Api.Persistance;
 
-namespace RemoteBackups.Api.Features.Register
+namespace RemoteBackups.Api.Features.User.Register
 {
     public class RegisterUser
     {
@@ -52,7 +52,7 @@ namespace RemoteBackups.Api.Features.Register
 
                 string hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
-                var user = new User(request.Login, hashedPassword);
+                var user = new Entities.User(request.Login, hashedPassword);
 
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync(cancellationToken);

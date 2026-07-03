@@ -6,7 +6,7 @@ using RemoteBackups.Api.Infrastructure.Validations;
 using RemoteBackups.Api.Infrastructure.Validations.Interfaces;
 using RemoteBackups.Api.Persistance;
 
-namespace RemoteBackups.Api.Features.Login
+namespace RemoteBackups.Api.Features.User.Login
 {
     public class LoginUser
     {

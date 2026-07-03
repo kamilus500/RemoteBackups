@@ -106,6 +106,15 @@ namespace RemoteBackups.Blazor.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Files.
+        /// </summary>
+        public static string Files {
+            get {
+                return ResourceManager.GetString("Files", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Home.
         /// </summary>
         public static string Home {
@@ -151,6 +160,15 @@ namespace RemoteBackups.Blazor.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu No access.
+        /// </summary>
+        public static string No_access {
+            get {
+                return ResourceManager.GetString("No_access", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu The entered passwords are not identical..
         /// </summary>
         public static string Passwords_not_identical {
@@ -174,6 +192,42 @@ namespace RemoteBackups.Blazor.Resources {
         public static string Register_title {
             get {
                 return ResourceManager.GetString("Register_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Start loading.
+        /// </summary>
+        public static string Start_upload {
+            get {
+                return ResourceManager.GetString("Start_upload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Upload.
+        /// </summary>
+        public static string Upload {
+            get {
+                return ResourceManager.GetString("Upload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Upload files.
+        /// </summary>
+        public static string Upload_files {
+            get {
+                return ResourceManager.GetString("Upload_files", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu You must log in to be able to upload files..
+        /// </summary>
+        public static string You_must_log_in {
+            get {
+                return ResourceManager.GetString("You_must_log_in", resourceCulture);
             }
         }
     }

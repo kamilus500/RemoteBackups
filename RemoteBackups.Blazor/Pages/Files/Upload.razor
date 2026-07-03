@@ -1,0 +1,44 @@
+﻿@page "/upload"
+@implements IDisposable
+
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Authorization
+
+@attribute [Authorize]
+
+<AuthorizeView>
+    <Authorized>
+        <h3>@Localizer.GetString("Upload_files") (1GB max)</h3>
+        <div class="mb-3">
+            <input type="file" id="fileInput" class="form-control" />
+        </div>
+        <button class="btn btn-primary" @onclick="StartUpload">@Localizer.GetString("Start_upload")</button>
+
+        @if (isUploading)
+        {
+            <div class="mt-3">
+                <p>Postęp: @progress%</p>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: @progress%"></div>
+                </div>
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(statusMessage))
+        {
+            <div class="alert alert-info mt-3">@statusMessage</div>
+        }
+    </Authorized>
+    
+    <NotAuthorized>
+        <div class="alert alert-danger mt-5">
+            <h4>@Localizer.GetString("No_access")</h4>
+            <p>@Localizer.GetString("You_must_log_in")</p>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
+
+@if (!string.IsNullOrEmpty(statusMessage))
+{
+    <div class="alert alert-info mt-3">@statusMessage</div>
+}

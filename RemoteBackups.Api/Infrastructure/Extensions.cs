@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using RemoteBackups.Api.Infrastructure.Authentication;
@@ -12,7 +13,6 @@ using RemoteBackups.Api.Infrastructure.Validations.Interfaces;
 using RemoteBackups.Api.Persistance;
 using System.Reflection;
 using System.Text;
-
 namespace RemoteBackups.Api.Infrastructure;
 
 public static class Extensions
@@ -26,6 +26,24 @@ public static class Extensions
                 policy.AllowAnyOrigin()
                       .AllowAnyHeader()
                       .AllowAnyMethod();
+            });
+
+            options.AddPolicy("TusCorsPolicy", policy =>
+            {
+                policy.WithOrigins("http://localhost:5177")
+                      .AllowAnyMethod()
+                      .AllowAnyHeader()
+                      .WithExposedHeaders(
+                          "Tus-Resumable",
+                          "Tus-Version",
+                          "Tus-Extension",
+                          "Tus-Max-Size",
+                          "Upload-Length",
+                          "Upload-Offset",
+                          "Location",
+                          "Upload-Metadata",
+                          "Upload-Defer-Length",
+                          "Upload-Concat");
             });
         });
 
@@ -141,6 +159,22 @@ public static class Extensions
                 Version = "v1",
                 Description = "Remote backups API"
             });
+
+            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Name = "Authorization",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.Http,
+                Scheme = "Bearer",
+                BearerFormat = "JWT",
+                Description = "Wpisz 'Bearer' [spacja] a potem swój token."
+            });
+
+            c.AddSecurityRequirement(document =>
+                new OpenApiSecurityRequirement
+                {
+                    [new OpenApiSecuritySchemeReference("Bearer", document)] = []
+                });
         });
 
         return services;

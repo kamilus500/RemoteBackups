@@ -37,19 +37,26 @@ namespace RemoteBackups.Blazor.Extensions
 
             services.AddScoped<IUserService, UserService>();
 
+            services.AddScoped<IFileService, FileService>();
+
             return services;
         }
 
         public static IServiceCollection AddApiClients(this IServiceCollection services)
         {
-            services.AddScoped(sp =>
+            services.AddTransient<JwtInterceptor>();
+
+            services.AddHttpClient("ApiClient", (sp, client) =>
             {
                 var apiSettings = sp.GetRequiredService<IOptions<ApiSettings>>().Value;
+                client.BaseAddress = new Uri(apiSettings.BaseUrl);
+            })
+            .AddHttpMessageHandler<JwtInterceptor>();
 
-                return new HttpClient
-                {
-                    BaseAddress = new Uri(apiSettings.BaseUrl)
-                };
+            services.AddScoped(sp =>
+            {
+                var factory = sp.GetRequiredService<IHttpClientFactory>();
+                return factory.CreateClient("ApiClient");
             });
 
             return services;

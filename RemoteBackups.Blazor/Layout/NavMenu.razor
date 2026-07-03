@@ -20,7 +20,7 @@
                 </MudText>
 
                 <MudButton Variant="Variant.Outlined" Color="Color.Error" FullWidth="true" StartIcon="@Icons.Material.Filled.Logout" OnClick="LogOut">
-                    @Localizer.GetString("Logout")
+                    @Localizer.GetString("LogOut")
                 </MudButton>
             </MudPaper>
         </Authorized>
@@ -42,6 +42,8 @@
     <MudDivider Class="my-2" />
 
     <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">@Localizer.GetString("Home")</MudNavLink>
+    <MudNavLink Href="/files" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.TableView">@Localizer.GetString("Files")</MudNavLink>
+    <MudNavLink Href="/upload" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.UploadFile">@Localizer.GetString("Upload")</MudNavLink>
     
 </MudNavMenu>
 

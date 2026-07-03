@@ -132,6 +132,9 @@
   <data name="Field_password_required" xml:space="preserve">
     <value>The password field is required.</value>
   </data>
+  <data name="Files" xml:space="preserve">
+    <value>Files</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
@@ -147,6 +150,9 @@
   <data name="LogOut" xml:space="preserve">
     <value>Logout</value>
   </data>
+  <data name="No_access" xml:space="preserve">
+    <value>No access</value>
+  </data>
   <data name="Passwords_not_identical" xml:space="preserve">
     <value>The entered passwords are not identical.</value>
   </data>
@@ -155,5 +161,17 @@
   </data>
   <data name="Register_title" xml:space="preserve">
     <value>Register</value>
+  </data>
+  <data name="Start_upload" xml:space="preserve">
+    <value>Start loading</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="Upload_files" xml:space="preserve">
+    <value>Upload files</value>
+  </data>
+  <data name="You_must_log_in" xml:space="preserve">
+    <value>You must log in to be able to upload files.</value>
   </data>
 </root>
