@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Options;
+using MudBlazor.Services;
 using RemoteBackups.Blazor.Configurations;
 using RemoteBackups.Blazor.Providers;
 using RemoteBackups.Blazor.Services;
@@ -19,6 +20,8 @@ namespace RemoteBackups.Blazor.Extensions
 
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.AddMudServices();
+
             services.AddScoped<ILocalStorageService, LocalStorageService>();
 
             services.AddScoped<IHttpService, HttpService>();
