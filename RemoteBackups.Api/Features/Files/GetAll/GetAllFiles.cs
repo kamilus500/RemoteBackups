@@ -11,7 +11,7 @@ namespace RemoteBackups.Api.Features.Files.GetAll
         public record GetFilesQuery(Guid UserId) : IRequest<List<FileDto>>;
         public record FileDto(Guid Id, string OriginalName, string ContentType, long SizeInBytes, DateTime UploadAt);
 
-        public class SaveFileMetadataValidator : IValidator<GetFilesQuery>
+        public class GetAllFilesValidator : IValidator<GetFilesQuery>
         {
             public ValidationResult Validate(GetFilesQuery instance)
             {

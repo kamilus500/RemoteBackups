@@ -12,7 +12,7 @@ namespace RemoteBackups.Api.Features.Files.Download
         public record DownloadFileQuery(Guid FileId, Guid UserId) : IRequest<DownloadFileResponse>;
         public record DownloadFileResponse(Stream FileStream, string ContentType, string OriginalName);
 
-        public class LoginUserValidator : IValidator<DownloadFileQuery>
+        public class DownloadFileValidator : IValidator<DownloadFileQuery>
         {
             public ValidationResult Validate(DownloadFileQuery instance)
             {

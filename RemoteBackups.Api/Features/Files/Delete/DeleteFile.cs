@@ -13,7 +13,7 @@ namespace RemoteBackups.Api.Features.Files.Delete
 
         public record DeleteFileResponse();
 
-        public class SaveFileMetadataValidator : IValidator<DeleteFileCommand>
+        public class DeleteFileCommandValidator : IValidator<DeleteFileCommand>
         {
             public ValidationResult Validate(DeleteFileCommand instance)
             {
