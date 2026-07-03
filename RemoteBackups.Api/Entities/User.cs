@@ -10,7 +10,7 @@
 
         public User()
         {
-            
+
         }
 
         public User(string login, string hashedPassword)

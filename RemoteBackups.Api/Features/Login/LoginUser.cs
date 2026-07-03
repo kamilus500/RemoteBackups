@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RemoteBackups.Api.Entities;
 using RemoteBackups.Api.Infrastructure.Authentication.Interfaces;
-using RemoteBackups.Api.Infrastructure.Endpoints.Interfaces;
 using RemoteBackups.Api.Infrastructure.Exceptions;
 using RemoteBackups.Api.Infrastructure.Messaging.Interfaces;
 using RemoteBackups.Api.Infrastructure.Validations;

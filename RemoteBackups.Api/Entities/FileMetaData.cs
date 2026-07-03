@@ -14,7 +14,7 @@
 
         public FileMetaData()
         {
-            
+
         }
 
         public FileMetaData(string orginalName, string contentType)

@@ -19,6 +19,16 @@ public static class Extensions
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration, Assembly featureAssembly)
     {
+        services.AddCors(options =>
+        {
+            options.AddPolicy("BlazorClientPolicy", policy =>
+            {
+                policy.AllowAnyOrigin()
+                      .AllowAnyHeader()
+                      .AllowAnyMethod();
+            });
+        });
+
         services.AddPersistance(configuration);
         services.AddMediator(featureAssembly);
         services.AddValidators(featureAssembly);

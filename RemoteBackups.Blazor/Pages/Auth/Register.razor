@@ -1,0 +1,71 @@
+﻿@page "/register"
+
+<PageTitle>Rejestracja</PageTitle>
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="row w-100 justify-content-center">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+
+            <div class="card shadow border-0 rounded-3 p-4">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4 fw-bold text-primary">Załóż konto</h3>
+
+                    @if (!string.IsNullOrEmpty(errorMessage))
+                    {
+                        <div class="alert alert-danger text-center small py-2 mb-3" role="alert">
+                            @errorMessage
+                        </div>
+                    }
+
+                    @if (!string.IsNullOrEmpty(successMessage))
+                    {
+                        <div class="alert alert-success text-center small py-2 mb-3" role="alert">
+                            @successMessage
+                        </div>
+                    }
+
+                    <EditForm Model="@registerModel" OnValidSubmit="HandleRegister">
+                        <DataAnnotationsValidator />
+
+                        <div class="mb-3">
+                            <label for="login" class="form-label fw-semibold">Login</label>
+                            <InputText id="login" class="form-control" @bind-Value="registerModel.Login" placeholder="Wybierz login..." />
+                            <ValidationMessage For="() => registerModel.Login" class="text-danger small mt-1" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label fw-semibold">Hasło</label>
+                            <InputText id="password" type="password" class="form-control" @bind-Value="registerModel.Password" placeholder="Wpisz hasło..." />
+                            <ValidationMessage For="() => registerModel.Password" class="text-danger small mt-1" />
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="confirmPassword" class="form-label fw-semibold">Powtórz hasło</label>
+                            <InputText id="confirmPassword" type="password" class="form-control" @bind-Value="registerModel.ConfirmPassword" placeholder="Powtórz hasło..." />
+                            <ValidationMessage For="() => registerModel.ConfirmPassword" class="text-danger small mt-1" />
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 py-2 fw-bold shadow-sm" disabled="@isSubmitting">
+                            @if (isSubmitting)
+                            {
+                                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                <span>Rejestracja...</span>
+                            }
+                            else
+                            {
+                                <span>Zarejestruj się</span>
+                            }
+                        </button>
+                    </EditForm>
+
+                    <div class="text-center mt-3">
+                        <span class="small text-muted">Masz już konto? </span>
+                        <a href="/login" class="small fw-semibold text-decoration-none">Zaloguj się</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

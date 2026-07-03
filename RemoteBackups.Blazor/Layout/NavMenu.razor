@@ -1,0 +1,96 @@
+﻿@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthStateProvider
+@using Microsoft.AspNetCore.Components.Authorization
+@using RemoteBackups.Blazor.Providers
+
+<div class="top-row ps-3 navbar navbar-dark bg-dark border-bottom border-secondary border-opacity-25">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold text-primary" href="">
+            <i class="bi bi-cloud-check-fill me-2"></i>RemoteBackups
+        </a>
+        <button title="Navigation menu" class="navbar-toggler border-0" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+    <nav class="nav flex-column">
+
+        <AuthorizeView>
+            <Authorized>
+                <div class="mx-3 my-3 p-3 rounded-3 bg-dark bg-opacity-50 border border-secondary border-opacity-25 text-center shadow-sm">
+                    <div class="position-relative d-inline-block mb-2">
+                        <img src="images/default-avatar.png" alt="Avatar" class="rounded-circle shadow" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--bs-primary);" />
+                        <span class="position-absolute bottom-0 end-0 p-1 bg-success border border-2 border-dark rounded-circle" title="Status: Online"></span>
+                    </div>
+
+                    <div class="small text-muted mb-1" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Zalogowany jako</div>
+                    <div class="fw-bold text-white text-truncate mb-3 px-1" style="font-size: 0.95rem;" title="@context.User.Identity?.Name">
+                        @context.User.Identity?.Name
+                    </div>
+
+                    <button class="btn btn-sm btn-outline-danger w-100 d-flex align-items-center justify-content-center gap-2 py-2 fw-semibold shadow-sm" @onclick="LogOut">
+                        <span class="bi bi-box-arrow-right lh-1" aria-hidden="true"></span>
+                        <span>Wyloguj się</span>
+                    </button>
+                </div>
+            </Authorized>
+
+            <NotAuthorized>
+                <div class="mx-3 my-3 p-3 rounded-3 bg-dark bg-opacity-50 border border-secondary border-opacity-25 shadow-sm text-center">
+                    <div class="small text-muted mb-3" style="font-size: 0.8rem;">Witaj! Zarządzaj kopiami zapasowymi</div>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-sm btn-primary w-100 py-2 fw-bold d-flex align-items-center gap-2 shadow-sm" @onclick="LogIn">
+                            <span class="bi bi-box-arrow-in-right lh-1" aria-hidden="true"></span>
+                            <span>Zaloguj się</span>
+                        </button>
+                        <button class="btn btn-sm btn-outline-light w-100 py-2 fw-semibold d-flex align-items-center gap-2" @onclick="Register">
+                            <span class="bi bi-person-plus lh-1" aria-hidden="true"></span>
+                            <span>Zarejestruj się</span>
+                        </button>
+                    </div>
+                </div>
+            </NotAuthorized>
+        </AuthorizeView>
+
+        <hr class="mx-3 my-2 text-secondary opacity-25" />
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link rounded-2 d-flex align-items-center gap-3 px-3 py-2" href="" Match="NavLinkMatch.All">
+                <span class="bi bi-house-door-fill" aria-hidden="true"></span>
+                <span>Strona główna</span>
+            </NavLink>
+        </div>
+    </nav>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+    private async Task LogOut()
+    {
+        if (AuthStateProvider is CustomAuthStateProvider customProvider)
+        {
+            await customProvider.NotifyUserLogout();
+        }
+
+        Navigation.NavigateTo("/");
+    }
+
+    private void LogIn()
+    {
+        Navigation.NavigateTo("/login");
+    }
+
+    private void Register()
+    {
+        Navigation.NavigateTo("/register");
+    }
+}

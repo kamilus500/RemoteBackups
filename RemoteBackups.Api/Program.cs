@@ -16,6 +16,8 @@ app.MapSwagger();
 
 app.UseExceptionHandler();
 
+app.UseCors("BlazorClientPolicy");
+
 app.UseAuthentication();
 app.UseAuthorization();
 

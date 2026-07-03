@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="RemoteBackups.Api/RemoteBackups.Api.csproj" />
+  <Project Path="RemoteBackups.Blazor/RemoteBackups.Blazor.csproj" Id="1724a030-9a8a-4ee0-955b-1789f33dc993" />
 </Solution>
