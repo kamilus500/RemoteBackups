@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
 using RemoteBackups.Blazor.Models.Contracts.Files.GetAll;
-using RemoteBackups.Blazor.Services;
 using RemoteBackups.Blazor.Services.Interfaces;
 
 namespace RemoteBackups.Blazor.Pages.Files

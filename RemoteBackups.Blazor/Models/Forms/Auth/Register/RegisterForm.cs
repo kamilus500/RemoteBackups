@@ -4,16 +4,22 @@ namespace RemoteBackups.Blazor.Models.Forms.Auth.Register
 {
     public class RegisterForm
     {
-        [Required(ErrorMessage = "Pole Login jest wymagane.")]
-        [MinLength(3, ErrorMessage = "Login musi mieć minimum 3 znaki.")]
+        [Required(
+            ErrorMessageResourceType = typeof(Resources.Resources),
+            ErrorMessageResourceName = "Field_login_required")]
         public string Login { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Pole Hasło jest wymagane.")]
-        [MinLength(6, ErrorMessage = "Hasło musi mieć minimum 6 znaków.")]
+        [Required(
+            ErrorMessageResourceType = typeof(Resources.Resources),
+            ErrorMessageResourceName = "Field_password_required")]
         public string Password { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Potwierdzenie hasła jest wymagane.")]
-        [Compare(nameof(Password), ErrorMessage = "Podane hasła nie są identyczne.")]
+        [Required(
+            ErrorMessageResourceType = typeof(Resources.Resources),
+            ErrorMessageResourceName = "Confirmation_password")]
+        [Compare(nameof(Password),
+            ErrorMessageResourceType = typeof(Resources.Resources),
+            ErrorMessageResourceName = "Passwords_not_identical")]
         public string ConfirmPassword { get; set; } = string.Empty;
     }
 }

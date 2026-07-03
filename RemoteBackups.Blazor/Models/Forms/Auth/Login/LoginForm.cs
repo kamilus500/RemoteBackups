@@ -4,11 +4,14 @@ namespace RemoteBackups.Blazor.Models.Forms.Auth.Login
 {
     public class LoginForm
     {
-        [Required(ErrorMessage = "Pole Login jest wymagane.")]
-        [MinLength(3, ErrorMessage = "Login musi mieć minimum 3 znaki.")]
+        [Required(
+            ErrorMessageResourceType = typeof(Resources.Resources),
+            ErrorMessageResourceName = "Field_login_required")]
         public string Login { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Pole Hasło jest wymagane.")]
+        [Required(
+            ErrorMessageResourceType = typeof(Resources.Resources),
+            ErrorMessageResourceName = "Field_password_required")]
         public string Password { get; set; } = string.Empty;
     }
 }

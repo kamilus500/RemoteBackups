@@ -70,6 +70,24 @@ namespace RemoteBackups.Blazor.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Actions.
+        /// </summary>
+        public static string Actions {
+            get {
+                return ResourceManager.GetString("Actions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu The login field is required..
+        /// </summary>
+        public static string c {
+            get {
+                return ResourceManager.GetString("c", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Password confirmation is required..
         /// </summary>
         public static string Confirmation_password {
@@ -88,11 +106,20 @@ namespace RemoteBackups.Blazor.Resources {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu The login field is required..
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Delete.
         /// </summary>
-        public static string Field_login_required {
+        public static string Delete {
             get {
-                return ResourceManager.GetString("Field_login_required", resourceCulture);
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Download.
+        /// </summary>
+        public static string Download {
+            get {
+                return ResourceManager.GetString("Download", resourceCulture);
             }
         }
         
@@ -102,6 +129,15 @@ namespace RemoteBackups.Blazor.Resources {
         public static string Field_password_required {
             get {
                 return ResourceManager.GetString("Field_password_required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu File name.
+        /// </summary>
+        public static string File_name {
+            get {
+                return ResourceManager.GetString("File_name", resourceCulture);
             }
         }
         
@@ -160,6 +196,15 @@ namespace RemoteBackups.Blazor.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu My backups.
+        /// </summary>
+        public static string My_backups {
+            get {
+                return ResourceManager.GetString("My_backups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu No access.
         /// </summary>
         public static string No_access {
@@ -196,6 +241,24 @@ namespace RemoteBackups.Blazor.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Rows per page.
+        /// </summary>
+        public static string Rows_Per_Page_String {
+            get {
+                return ResourceManager.GetString("Rows_Per_Page_String", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Size.
+        /// </summary>
+        public static string Size {
+            get {
+                return ResourceManager.GetString("Size", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Start loading.
         /// </summary>
         public static string Start_upload {
@@ -210,6 +273,15 @@ namespace RemoteBackups.Blazor.Resources {
         public static string Upload {
             get {
                 return ResourceManager.GetString("Upload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Upload date.
+        /// </summary>
+        public static string Upload_date {
+            get {
+                return ResourceManager.GetString("Upload_date", resourceCulture);
             }
         }
         

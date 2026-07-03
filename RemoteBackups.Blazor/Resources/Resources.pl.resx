@@ -120,11 +120,20 @@
   <data name="Account_question" xml:space="preserve">
     <value>Masz już konto?</value>
   </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Akcje</value>
+  </data>
   <data name="Confirmation_password" xml:space="preserve">
     <value>Potwierdzenie hasła jest wymagane.</value>
   </data>
   <data name="Create_account" xml:space="preserve">
     <value>Załóż konto</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Usuń</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Pobierz</value>
   </data>
   <data name="Field_login_required" xml:space="preserve">
     <value>Pole Login jest wymagane.</value>
@@ -134,6 +143,9 @@
   </data>
   <data name="Files" xml:space="preserve">
     <value>Pliki</value>
+  </data>
+  <data name="File_name" xml:space="preserve">
+    <value>Nazwa pliku</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Strona główna</value>
@@ -150,17 +162,23 @@
   <data name="LogOut" xml:space="preserve">
     <value>Wyloguj się</value>
   </data>
+  <data name="My_backups" xml:space="preserve">
+    <value>Moje kopie zapasowe</value>
+  </data>
   <data name="No_access" xml:space="preserve">
     <value>Brak dostępu</value>
   </data>
   <data name="Passwords_not_identical" xml:space="preserve">
     <value>Podane hasła nie są identyczne.</value>
   </data>
-  <data name="Register" xml:space="preserve">
-    <value>Zarejestruj się</value>
-  </data>
   <data name="Register_title" xml:space="preserve">
     <value>Rejestracja</value>
+  </data>
+  <data name="Rows_Per_Page_String" xml:space="preserve">
+    <value>Wierszy na stronę</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Rozmiar</value>
   </data>
   <data name="Start_upload" xml:space="preserve">
     <value>Rozpocznij przesyłanie</value>
@@ -168,10 +186,16 @@
   <data name="Upload" xml:space="preserve">
     <value>Wgraj</value>
   </data>
+  <data name="Upload_date" xml:space="preserve">
+    <value>Data wgrania</value>
+  </data>
   <data name="Upload_files" xml:space="preserve">
     <value>Upload Plików</value>
   </data>
   <data name="You_must_log_in" xml:space="preserve">
     <value>Musisz się zalogować, aby mieć możliwość przesyłania plików.</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Zarejestruj się</value>
   </data>
 </root>

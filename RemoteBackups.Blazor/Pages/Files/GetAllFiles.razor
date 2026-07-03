@@ -6,27 +6,27 @@
 
 <AuthorizeView>
     <Authorized>
-        <MudText Typo="Typo.h4" Class="mb-4">Moje kopie zapasowe</MudText>
+        <MudText Typo="Typo.h4" Class="mb-4">@Localizer.GetString("My_backups")</MudText>
 
         <MudTable Items="@_files" Dense="true" Hover="true" Responsive="true" Loading="@_isLoading">
             <HeaderContent>
-                <MudTh>Nazwa pliku</MudTh>
-                <MudTh>Rozmiar</MudTh>
-                <MudTh>Data wgrania</MudTh>
-                <MudTh Style="text-align: right;">Akcje</MudTh>
+                <MudTh>@Localizer.GetString("File_name")</MudTh>
+                <MudTh>@Localizer.GetString("Size")</MudTh>
+                <MudTh>@Localizer.GetString("Upload_date")</MudTh>
+                <MudTh Style="text-align: right;">@Localizer.GetString("Actions")</MudTh>
             </HeaderContent>
 
             <RowTemplate Context="file">
-                <MudTd DataLabel="Nazwa pliku">@file.OriginalName</MudTd>
-                <MudTd DataLabel="Rozmiar">@FormatBytes(file.SizeInBytes)</MudTd>
-                <MudTd DataLabel="Data wgrania">@file.UploadAt.ToLocalTime().ToString("g")</MudTd>
-                <MudTd DataLabel="Akcje" Style="text-align: right;">
-                    <MudTooltip Text="Pobierz">
+                <MudTd DataLabel="@Localizer.GetString("File_name")">@file.OriginalName</MudTd>
+                <MudTd DataLabel="@Localizer.GetString("Size")">@FormatBytes(file.SizeInBytes)</MudTd>
+                <MudTd DataLabel="@Localizer.GetString("Upload_date")">@file.UploadAt.ToLocalTime().ToString("g")</MudTd>
+                <MudTd DataLabel="@Localizer.GetString("Actions")" Style="text-align: right;">
+                    <MudTooltip Text="@Localizer.GetString("Download")">
                         <MudIconButton Icon="@Icons.Material.Filled.Download"
                                        Color="Color.Primary"
                                        OnClick="@(() => DownloadFile(file.Id, file.OriginalName))" />
                     </MudTooltip>
-                    <MudTooltip Text="Usuń">
+                    <MudTooltip Text="@Localizer.GetString("Delete")">
                         <MudIconButton Icon="@Icons.Material.Filled.Delete"
                                        Color="Color.Error"
                                        OnClick="@(() => DeleteFile(file.Id))" />
@@ -35,7 +35,7 @@
             </RowTemplate>
 
             <PagerContent>
-                <MudTablePager InfoFormat="{first_item}-{last_item} z {all_items}" RowsPerPageString="Wierszy na stronę:" />
+                <MudTablePager InfoFormat="{first_item}-{last_item} z {all_items}" RowsPerPageString="@Localizer.GetString("Rows_Per_Page_String")" />
             </PagerContent>
         </MudTable>
     </Authorized>
