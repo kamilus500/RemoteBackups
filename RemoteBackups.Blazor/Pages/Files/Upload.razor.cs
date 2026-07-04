@@ -22,6 +22,18 @@ namespace RemoteBackups.Blazor.Pages.Files
             objRef = DotNetObjectReference.Create(this);
         }
 
+        private string selectedFilesInfo = "";
+
+        private async Task HandleFileSelection(ChangeEventArgs e)
+        {
+            var fileNames = await JSRuntime.InvokeAsync<string[]>("eval",
+                "Array.from(document.getElementById('fileInput').files).map(f => f.name)");
+
+            selectedFilesInfo = fileNames.Length > 0
+                ? $"{Localizer.GetString("Selected_files")}: {string.Join(", ", fileNames)}"
+                : "";
+        }
+
         private async Task StartUpload()
         {
             var token = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "authToken");
@@ -32,6 +44,7 @@ namespace RemoteBackups.Blazor.Pages.Files
             isUploading = true;
             fileProgresses.Clear();
             fileStatuses.Clear();
+            statusMessage = $"{Localizer.GetString("Start_uploading")} ...";
 
             foreach (var name in fileNames)
             {
@@ -52,6 +65,11 @@ namespace RemoteBackups.Blazor.Pages.Files
         public void OnUploadSuccess(string fileName)
         {
             fileStatuses[fileName] = Localizer.GetString("Ready");
+
+            if (fileStatuses.Count == fileProgresses.Count)
+            {
+                statusMessage = Localizer.GetString("Files_Success");
+            }
             StateHasChanged();
         }
 
@@ -59,6 +77,9 @@ namespace RemoteBackups.Blazor.Pages.Files
         public void OnUploadError(string fileName, string error)
         {
             fileStatuses[fileName] = Localizer.GetString("Error") + error;
+
+            statusMessage = Localizer.GetString("Upload_errors");
+
             StateHasChanged();
         }
 

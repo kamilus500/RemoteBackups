@@ -204,4 +204,20 @@
   <data name="Ready" xml:space="preserve">
     <value>Gotowe!</value>
   </data>
+  <data name="Start_uploading" xml:space="preserve">
+    <value>Rozpoczęcie wysyłania</value>
+  </data>
+  <data name="Files_Success" xml:space="preserve">
+    <value>Wszystkie pliki zostały wysłane!</value>
+  </data>
+  <data name="Upload_errors" xml:space="preserve">
+    <value>Angielski
+Wystąpił błąd podczas wysyłania.</value>
+  </data>
+  <data name="Select_files" xml:space="preserve">
+    <value>Wybierz pliki</value>
+  </data>
+  <data name="Selected_files" xml:space="preserve">
+    <value>Wybrane pliki</value>
+  </data>
 </root>

@@ -160,6 +160,15 @@ namespace RemoteBackups.Blazor.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu All files uploaded !.
+        /// </summary>
+        public static string Files_Success {
+            get {
+                return ResourceManager.GetString("Files_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Home.
         /// </summary>
         public static string Home {
@@ -268,6 +277,24 @@ namespace RemoteBackups.Blazor.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Select files.
+        /// </summary>
+        public static string Select_files {
+            get {
+                return ResourceManager.GetString("Select_files", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Selected files.
+        /// </summary>
+        public static string Selected_files {
+            get {
+                return ResourceManager.GetString("Selected_files", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Size.
         /// </summary>
         public static string Size {
@@ -286,6 +313,15 @@ namespace RemoteBackups.Blazor.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Start uploading.
+        /// </summary>
+        public static string Start_uploading {
+            get {
+                return ResourceManager.GetString("Start_uploading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Upload.
         /// </summary>
         public static string Upload {
@@ -300,6 +336,15 @@ namespace RemoteBackups.Blazor.Resources {
         public static string Upload_date {
             get {
                 return ResourceManager.GetString("Upload_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu An error occurred while sending..
+        /// </summary>
+        public static string Upload_errors {
+            get {
+                return ResourceManager.GetString("Upload_errors", resourceCulture);
             }
         }
         

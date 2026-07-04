@@ -8,11 +8,32 @@
 
 <AuthorizeView>
     <Authorized>
-        <h3>@Localizer.GetString("Upload_files") (1GB max)</h3>
-        <div class="mb-3">
-            <input type="file" id="fileInput" class="form-control" multiple />
+        <h3 class="mb-4">@Localizer.GetString("Upload_files") (1GB max)</h3>
+
+        <div class="d-flex align-center gap-3 mb-4">
+            <input type="file" id="fileInput" class="d-none" multiple @onchange="HandleFileSelection" />
+
+            <MudButton HtmlTag="label"
+                       Variant="Variant.Outlined"
+                       Color="Color.Primary"
+                       StartIcon="@Icons.Material.Filled.AttachFile"
+                       for="fileInput">
+                @Localizer.GetString("Select_files")
+            </MudButton>
+
+            <MudButton Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       StartIcon="@Icons.Material.Filled.CloudUpload"
+                       OnClick="StartUpload"
+                       Disabled="@isUploading">
+                @Localizer.GetString("Start_upload")
+            </MudButton>
         </div>
-        <button class="btn btn-primary" @onclick="StartUpload">@Localizer.GetString("Start_upload")</button>
+
+        @if (!string.IsNullOrEmpty(selectedFilesInfo))
+        {
+            <MudText Typo="Typo.caption" Class="mb-3">@selectedFilesInfo</MudText>
+        }
 
         @if (isUploading)
         {
