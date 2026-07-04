@@ -79,15 +79,6 @@ namespace RemoteBackups.Blazor.Resources {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu The login field is required..
-        /// </summary>
-        public static string c {
-            get {
-                return ResourceManager.GetString("c", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Password confirmation is required..
         /// </summary>
         public static string Confirmation_password {
@@ -120,6 +111,24 @@ namespace RemoteBackups.Blazor.Resources {
         public static string Download {
             get {
                 return ResourceManager.GetString("Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Error.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu The login field is required..
+        /// </summary>
+        public static string Field_login_required {
+            get {
+                return ResourceManager.GetString("Field_login_required", resourceCulture);
             }
         }
         
@@ -219,6 +228,15 @@ namespace RemoteBackups.Blazor.Resources {
         public static string Passwords_not_identical {
             get {
                 return ResourceManager.GetString("Passwords_not_identical", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu !.
+        /// </summary>
+        public static string Ready {
+            get {
+                return ResourceManager.GetString("Ready", resourceCulture);
             }
         }
         
