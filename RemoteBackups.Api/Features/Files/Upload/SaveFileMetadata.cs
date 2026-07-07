@@ -40,15 +40,17 @@ namespace RemoteBackups.Api.Features.Files.Upload
         internal sealed class SaveFileMetadataHandler : IRequestHandler<SaveFileMetadataCommand, SaveFileMetadataResponse>
         {
             private readonly ApplicationDbContext _context;
+            private readonly string _storagePath;
 
-            public SaveFileMetadataHandler(ApplicationDbContext context)
+            public SaveFileMetadataHandler(ApplicationDbContext context, IConfiguration configuration)
             {
                 _context = context;
+                _storagePath = configuration["TusSettings:StoragePath"] ?? @"C:\TusStorage";
             }
 
             public async Task<SaveFileMetadataResponse> Handle(SaveFileMetadataCommand request, CancellationToken cancellationToken)
             {
-                var physicalPath = Path.Combine(@"C:\TusStorage", request.TusFileId);
+                var physicalPath = Path.Combine(_storagePath, request.TusFileId);
 
                 long sizeInBytes = new FileInfo(physicalPath).Length;
 

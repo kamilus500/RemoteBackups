@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using RemoteBackups.Api.Features.Files.Upload;
 using RemoteBackups.Tests.Integration.Fixtures;
 using Shouldly;
@@ -20,16 +21,25 @@ namespace RemoteBackups.Tests.Integration.Tests.Files
             var tusFileId = Guid.NewGuid().ToString();
             var fileName = "test-file.txt";
 
-            var storagePath = @"C:\TusStorage";
-            if (!Directory.Exists(storagePath)) Directory.CreateDirectory(storagePath);
+            var tempStoragePath = Path.Combine(Path.GetTempPath(), "TusStorageTests");
+            if (!Directory.Exists(tempStoragePath)) Directory.CreateDirectory(tempStoragePath);
 
-            var fullPath = Path.Combine(storagePath, tusFileId);
+            var fullPath = Path.Combine(tempStoragePath, tusFileId);
             var content = "Hello World";
             await File.WriteAllTextAsync(fullPath, content);
 
+            var inMemorySettings = new Dictionary<string, string?>
+            {
+                {"TusSettings:StoragePath", tempStoragePath}
+            };
+
+            IConfiguration configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(inMemorySettings)
+                .Build();
+
             try
             {
-                var handler = new SaveFileMetadata.SaveFileMetadataHandler(DbContext);
+                var handler = new SaveFileMetadata.SaveFileMetadataHandler(DbContext, configuration);
                 var command = new SaveFileMetadata.SaveFileMetadataCommand(tusFileId, fileName, "text/plain", user.Id);
 
                 var result = await handler.Handle(command, CancellationToken.None);

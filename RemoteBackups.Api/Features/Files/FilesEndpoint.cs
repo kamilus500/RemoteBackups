@@ -68,38 +68,44 @@ namespace RemoteBackups.Api.Features.Files
             .Produces(StatusCodes.Status204NoContent)
             .Produces(StatusCodes.Status404NotFound);
 
-            group.MapTus("/upload", async httpContext => new DefaultTusConfiguration
+            group.MapTus("/upload", async httpContext =>
             {
-                Store = new TusDiskStore(@"C:\TusStorage"),
-                MaxAllowedUploadSizeInBytes = 1024 * 1024 * 1024,
-                Events = new Events
+                var config = httpContext.RequestServices.GetRequiredService<IConfiguration>();
+                var storagePath = config["TusSettings:StoragePath"] ?? @"C:\TusStorage";
+
+                return new DefaultTusConfiguration
                 {
-                    OnFileCompleteAsync = async eventContext =>
+                    Store = new TusDiskStore(storagePath),
+                    MaxAllowedUploadSizeInBytes = 1024 * 1024 * 1024,
+                    Events = new Events
                     {
-                        var fileId = eventContext.FileId;
-                        var file = await ((ITusReadableStore)eventContext.Store).GetFileAsync(fileId, eventContext.CancellationToken);
-                        var metadata = await file.GetMetadataAsync(eventContext.CancellationToken);
-
-                        var originalFileName = metadata.ContainsKey("filename")
-                            ? metadata["filename"].GetString(System.Text.Encoding.UTF8)
-                            : "Unknown";
-
-                        var contentType = metadata.ContainsKey("filetype")
-                            ? metadata["filetype"].GetString(System.Text.Encoding.UTF8)
-                            : "application/octet-stream";
-
-                        var userIdClaim = eventContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                        if (!Guid.TryParse(userIdClaim, out var userId))
+                        OnFileCompleteAsync = async eventContext =>
                         {
-                            userId = Guid.Empty;
+                            var fileId = eventContext.FileId;
+                            var file = await ((ITusReadableStore)eventContext.Store).GetFileAsync(fileId, eventContext.CancellationToken);
+                            var metadata = await file.GetMetadataAsync(eventContext.CancellationToken);
+
+                            var originalFileName = metadata.ContainsKey("filename")
+                                ? metadata["filename"].GetString(System.Text.Encoding.UTF8)
+                                : "Unknown";
+
+                            var contentType = metadata.ContainsKey("filetype")
+                                ? metadata["filetype"].GetString(System.Text.Encoding.UTF8)
+                                : "application/octet-stream";
+
+                            var userIdClaim = eventContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                            if (!Guid.TryParse(userIdClaim, out var userId))
+                            {
+                                userId = Guid.Empty;
+                            }
+
+                            var mediator = eventContext.HttpContext.RequestServices.GetRequiredService<IMediator>();
+                            var command = new SaveFileMetadataCommand(fileId, originalFileName, contentType, userId);
+
+                            await mediator.Send(command, eventContext.CancellationToken);
                         }
-
-                        var mediator = eventContext.HttpContext.RequestServices.GetRequiredService<IMediator>();
-                        var command = new SaveFileMetadataCommand(fileId, originalFileName, contentType, userId);
-
-                        await mediator.Send(command, eventContext.CancellationToken);
                     }
-                }
+                };
             }).RequireAuthorization();
         }
     }
