@@ -10,7 +10,7 @@ namespace RemoteBackups.Tests.Unit.Validators
         [Fact]
         public void Validate_Should_ReturnSuccess_When_QueryIsValid()
         {
-            var query = new GetFilesQuery(Guid.NewGuid());
+            var query = new GetFilesQuery(Guid.NewGuid(), SearchTerm: null, ContentType: null, SortColumn: null, SortOrder: null, Page: 1, PageSize: 10);
 
             var result = _validator.Validate(query);
 
@@ -21,12 +21,38 @@ namespace RemoteBackups.Tests.Unit.Validators
         [Fact]
         public void Validate_Should_ReturnFailure_When_UserIdIsEmpty()
         {
-            var query = new GetFilesQuery(Guid.Empty);
+            var query = new GetFilesQuery(Guid.Empty, null, null, null, null, 1, 10);
 
             var result = _validator.Validate(query);
 
             result.IsValid.ShouldBeFalse();
             result.Errors.ShouldContain("UserId is required.");
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-5)]
+        public void Validate_Should_ReturnFailure_When_PageIsLessThanOrEqualToZero(int invalidPage)
+        {
+            var query = new GetFilesQuery(Guid.NewGuid(), null, null, null, null, invalidPage, 10);
+
+            var result = _validator.Validate(query);
+
+            result.IsValid.ShouldBeFalse();
+            result.Errors.ShouldContain("Page must be greater than 0.");
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-1)]
+        public void Validate_Should_ReturnFailure_When_PageSizeIsLessThanOrEqualToZero(int invalidPageSize)
+        {
+            var query = new GetFilesQuery(Guid.NewGuid(), null, null, null, null, 1, invalidPageSize);
+
+            var result = _validator.Validate(query);
+
+            result.IsValid.ShouldBeFalse();
+            result.Errors.ShouldContain("PageSize must be greater than 0.");
         }
     }
 }

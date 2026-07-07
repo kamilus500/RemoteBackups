@@ -1,6 +1,7 @@
 ﻿@page "/files"
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.Authorization
+@using RemoteBackups.Blazor.Models.Contracts.Files.GetAll
 
 @attribute [Authorize]
 
@@ -8,11 +9,30 @@
     <Authorized>
         <MudText Typo="Typo.h4" Class="mb-4">@Localizer.GetString("My_backups")</MudText>
 
-        <MudTable Items="@_files" Dense="true" Hover="true" Responsive="true" Loading="@_isLoading">
+        <MudTable T="FileDto"
+                  ServerData="@ServerReload"
+                  Dense="true" Hover="true" Responsive="true" @ref="_table">
+            
+            <ToolBarContent>
+                <MudSpacer />
+                <MudTextField T="string" ValueChanged="@(s => OnSearch(s))" 
+                              Placeholder="@Localizer.GetString("Search")" 
+                              Adornment="Adornment.Start" 
+                              AdornmentIcon="@Icons.Material.Filled.Search" 
+                              IconSize="Size.Medium" Class="mt-0">
+                </MudTextField>
+            </ToolBarContent>
+
             <HeaderContent>
-                <MudTh>@Localizer.GetString("File_name")</MudTh>
-                <MudTh>@Localizer.GetString("Size")</MudTh>
-                <MudTh>@Localizer.GetString("Upload_date")</MudTh>
+                <MudTh>
+                    <MudTableSortLabel SortLabel="name" T="FileDto">@Localizer.GetString("File_name")</MudTableSortLabel>
+                </MudTh>
+                <MudTh>
+                    <MudTableSortLabel SortLabel="size" T="FileDto">@Localizer.GetString("Size")</MudTableSortLabel>
+                </MudTh>
+                <MudTh>
+                    <MudTableSortLabel SortLabel="uploadAt" T="FileDto">@Localizer.GetString("Upload_date")</MudTableSortLabel>
+                </MudTh>
                 <MudTh Style="text-align: right;">@Localizer.GetString("Actions")</MudTh>
             </HeaderContent>
 

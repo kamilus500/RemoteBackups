@@ -1,4 +1,5 @@
-﻿using RemoteBackups.Api.Infrastructure.Endpoints.Interfaces;
+﻿using RemoteBackups.Api.Features.Files.GetAll;
+using RemoteBackups.Api.Infrastructure.Endpoints.Interfaces;
 using RemoteBackups.Api.Infrastructure.Messaging.Interfaces;
 using System.Security.Claims;
 using tusdotnet;
@@ -21,14 +22,29 @@ namespace RemoteBackups.Api.Features.Files
                            .WithTags("Files")
                            .RequireAuthorization();
 
-            group.MapGet("", async (ClaimsPrincipal user, IMediator mediator, CancellationToken cancellationToken) =>
+            group.MapGet("", async (
+                ClaimsPrincipal user,
+                IMediator mediator,
+                [AsParameters] GetFilesRequest request,
+                CancellationToken cancellationToken) =>
             {
                 var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
-                var response = await mediator.Send(new GetFilesQuery(userId), cancellationToken);
+
+                var query = new GetFilesQuery(
+                    userId,
+                    request.SearchTerm,
+                    request.ContentType,
+                    request.SortColumn,
+                    request.SortOrder,
+                    request.Page,
+                    request.PageSize
+                );
+
+                var response = await mediator.Send(query, cancellationToken);
                 return Results.Ok(response);
             })
             .WithName("GetFiles")
-            .Produces<List<FileDto>>(StatusCodes.Status200OK);
+            .Produces<PagedResult<FileDto>>(StatusCodes.Status200OK);
 
             group.MapGet("{fileId:guid}/download", async (Guid fileId, ClaimsPrincipal user, IMediator mediator, CancellationToken cancellationToken) =>
             {

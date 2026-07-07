@@ -3,50 +3,53 @@ using Microsoft.JSInterop;
 using MudBlazor;
 using RemoteBackups.Blazor.Models.Contracts.Files.GetAll;
 using RemoteBackups.Blazor.Services.Interfaces;
+using System.Threading;
 
 namespace RemoteBackups.Blazor.Pages.Files
 {
     public partial class GetAllFiles
     {
-        [Inject]
-        public IFileService FileService { get; set; }
+        [Inject] public IFileService FileService { get; set; }
+        [Inject] public IJSRuntime JS { get; set; }
+        [Inject] public ISnackbar Snackbar { get; set; }
+        [Inject] public ILocalizationService Localizer { get; set; }
 
-        [Inject]
-        public IJSRuntime JS { get; set; }
+        private MudTable<FileDto> _table;
+        private string _searchString = string.Empty;
 
-        [Inject]
-        public ISnackbar Snackbar { get; set; }
-
-        [Inject]
-        public ILocalizationService Localizer { get; set; }
-
-        private List<FileDto> _files = new();
-        private bool _isLoading = true;
-
-        protected override async Task OnInitializedAsync()
+        private void OnSearch(string text)
         {
-            await LoadFiles();
+            _searchString = text;
+            _table.ReloadServerData();
         }
 
-        private async Task LoadFiles()
+        private async Task<TableData<FileDto>> ServerReload(TableState state, CancellationToken cancellationToken)
         {
-            _isLoading = true;
             try
             {
-                var result = await FileService.GetFilesAsync();
+                var page = state.Page + 1;
+                var pageSize = state.PageSize;
+
+                var sortColumn = state.SortLabel;
+                var sortOrder = state.SortDirection == SortDirection.Descending ? "desc" : "asc";
+
+                var result = await FileService.GetFilesAsync(_searchString, sortColumn, sortOrder, page, pageSize);
+
                 if (result is not null)
                 {
-                    _files = result;
+                    return new TableData<FileDto>
+                    {
+                        TotalItems = result.TotalCount,
+                        Items = result.Items
+                    };
                 }
             }
             catch (Exception)
             {
                 Snackbar.Add("Błąd podczas ładowania listy plików.", Severity.Error);
             }
-            finally
-            {
-                _isLoading = false;
-            }
+
+            return new TableData<FileDto> { TotalItems = 0, Items = new List<FileDto>() };
         }
 
         private async Task DownloadFile(Guid id, string fileName)
@@ -77,7 +80,7 @@ namespace RemoteBackups.Blazor.Pages.Files
             if (success)
             {
                 Snackbar.Add("Plik został usunięty.", Severity.Success);
-                await LoadFiles();
+                await _table.ReloadServerData();
             }
             else
             {

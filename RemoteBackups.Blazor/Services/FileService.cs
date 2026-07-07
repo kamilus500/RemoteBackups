@@ -14,9 +14,26 @@ namespace RemoteBackups.Blazor.Services
             _httpClient = httpClient;
         }
 
-        public async Task<List<FileDto>?> GetFilesAsync()
+        public async Task<PagedResult<FileDto>?> GetFilesAsync(string? searchTerm, string? sortColumn, string? sortOrder, int page, int pageSize)
         {
-            return await _httpService.GetAsync<List<FileDto>>("api/files");
+            var queryParams = new List<string>
+            {
+                $"page={page}",
+                $"pageSize={pageSize}"
+            };
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+                queryParams.Add($"searchTerm={Uri.EscapeDataString(searchTerm)}");
+
+            if (!string.IsNullOrWhiteSpace(sortColumn))
+                queryParams.Add($"sortColumn={Uri.EscapeDataString(sortColumn)}");
+
+            if (!string.IsNullOrWhiteSpace(sortOrder))
+                queryParams.Add($"sortOrder={sortOrder}");
+
+            var queryString = string.Join("&", queryParams);
+
+            return await _httpService.GetAsync<PagedResult<FileDto>>($"api/files?{queryString}");
         }
 
         public async Task<bool> DeleteFileAsync(Guid fileId)
