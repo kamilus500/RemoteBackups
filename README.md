@@ -1,42 +1,42 @@
-🛡️ RemoteBackups
+🛡️ Remote Backups
 
-Aplikacja kliencko-serwerowa do bezpiecznego przechowywania i zarządzania kopiami zapasowymi. Projekt został zbudowany z naciskiem na skalowalność, czystość kodu oraz najwyższą wydajność, stanowiąc praktyczną implementację nowoczesnych wzorców projektowych w ekosystemie .NET.
+A client-server application for data storage and backup management. The project was developed with a focus on scalability, code quality, and robust architecture, demonstrating the practical implementation of design patterns within the .NET ecosystem.
 
-💡 Koncepcja Architektoniczna
+💡 Architectural Concept
 
-Projekt zostały zaimplementowany używając Vertical Slice Architecture. Kod REST API jest podzielony ze względu na funkcjonalności biznesowe (Features).
+The project was implemented using Vertical Slice Architecture. The REST API code is organized around business functionalities (features).
 
-Dzięki temu każdy "pionowy plaster" (np. Upload) jest w pełni autonomicznym bytem, od obsługi żądania HTTP po operacje na danych, co idealnie współgra z podejściem CQRS. Minimalizuje to sprzężenia, ułatwia testowanie i sprawia, że aplikacja jest gotowa na rozwój w realiach enterprise.
+As a result, each "vertical slice" (e.g., Upload) functions as a fully autonomous entity—spanning everything from HTTP request handling to data operations—which aligns perfectly with the CQRS approach. This minimizes coupling, simplifies testing, and ensures the application is ready for growth in an enterprise environment.
 
-🚀 Stos Technologiczny
+🚀 Tech stack
 
 Backend (REST API)
 
 .NET 10
 
-Vertical Slices & Minimal APIs – maksymalna spójność kodu wokół funkcji biznesowych.
+Vertical Slices & Minimal APIs – maximum code cohesion around business functions.
 
 Entity Framework Core
 
-JWT (JSON Web Tokens) – bezstanowa, bezpieczna autoryzacja i autentykacja.
+JWT (JSON Web Tokens) – Stateless, secure authorization and authentication.
 
 Frontend (SPA)
 
-Blazor WebAssembly – interaktywny interfejs renderowany po stronie klienta, napisany w całości w C#.
+Blazor WebAssembly – an interactive, client-side rendered interface written entirely in C#.
 
-✨ Główne Funkcjonalności
+✨ Key Features
 
-Pełne zarządzanie cyklem życia plików – płynny upload, bezpieczne pobieranie i usuwanie kopii zapasowych.
+Full file lifecycle management – ​​seamless upload, secure download, and backup deletion.
 
-Moduł tożsamości – kompletny proces rejestracji i logowania z zabezpieczeniem dostępu do zasobów.
+Identity module – complete registration and login process with secure resource access.
 
-Dashboard użytkownika – przejrzysty widok metadanych (rozmiary plików, daty utworzenia).
+User dashboard – clear view of metadata (file sizes, creation dates).
 
-🧪 Testowanie i Zapewnienie Jakości
+🧪 Testing and Quality Assurance
 
-Testy jednostkowe: Weryfikują kluczową logikę biznesową wewnątrz izolowanych handlerów, bez angażowania infrastruktury. Służą do błyskawicznego sprawdzania reguł walidacji i transformacji danych.
+Unit tests: These verify key business logic within isolated handlers, without involving infrastructure. They are used to rapidly check validation rules and data transformations.
 
-Testy integracyjne z Testcontainers: Zamiast używać wbudowanych atrap (mocków) czy baz in-memory, aplikacja wykorzystuje bibliotekę Testcontainers. Automatycznie podnosi ona rzeczywiste kontenery Dockerowe (np. relacyjną bazę danych) na czas trwania testów. Daje to stuprocentową pewność, że cała ścieżka od requestu HTTP, przez bazę danych, aż po zwrócenie odpowiedzi działa poprawnie.
+Integration tests with Testcontainers: Instead of using built-in mocks or in-memory databases, the application utilizes the Testcontainers library. It automatically spins up actual Docker containers (e.g., a relational database) for the duration of the tests. This provides 100% certainty that the entire flow—from the HTTP request, through the database, to the returned response—works correctly.
 
-Aby uruchomić wszystkie testy (wymagany uruchomiony Docker Desktop), użyj komendy:
+To run all tests (Docker Desktop must be running), use the command:
 dotnet test
