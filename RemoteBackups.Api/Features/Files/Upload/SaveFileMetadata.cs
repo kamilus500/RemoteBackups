@@ -12,7 +12,7 @@ namespace RemoteBackups.Api.Features.Files.Upload
             string TusFileId,
             string OriginalName,
             string ContentType,
-            Guid UserId) : IRequest<SaveFileMetadataResponse>;
+            Guid UserId) : ICommand<SaveFileMetadataResponse>;
 
         public record SaveFileMetadataResponse(Guid Id);
 

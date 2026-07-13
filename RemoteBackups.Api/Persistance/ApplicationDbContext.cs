@@ -7,6 +7,7 @@ namespace RemoteBackups.Api.Persistance
     {
         public DbSet<User> Users { get; set; }
         public DbSet<FileMetaData> FileMetaDatas { get; set; }
+        public DbSet<AuditLog> AuditLogs { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
